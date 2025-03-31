@@ -1,25 +1,25 @@
-SHELL=/bin/bash
-
 install:
-	unset CONDA_PREFIX && \
-	source .venv/bin/activate && maturin develop
+	conda deactivate -f
+	python -m maturin develop
 
 install-release:
-	unset CONDA_PREFIX && \
-	source .venv/bin/activate && maturin develop --release
+	conda deactivate -f
+	python -m maturin develop --release
 
 pre-commit:
 	cargo +nightly fmt --all && cargo clippy --all-features
-	.venv/bin/python -m ruff check . --fix --exit-non-zero-on-fix
-	.venv/bin/python -m ruff format polars_trading tests
-	.venv/bin/mypy polars_trading tests
+	python -m ruff check . --fix --exit-non-zero-on-fix
+	python -m ruff format polars_trading tests
+	mypy polars_trading tests
 
 test:
-	.venv/bin/python -m pytest tests
+	python -m pytest tests
 
 run: install
-	source .venv/bin/activate && python run.py
+	conda deactivate -f
+	python run.py
 
 run-release: install-release
-	source .venv/bin/activate && python run.py
+	conda deactivate -f
+	python run.py
 
