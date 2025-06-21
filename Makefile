@@ -1,9 +1,7 @@
 install:
-	conda deactivate -f
 	python -m maturin develop
 
 install-release:
-	conda deactivate -f
 	python -m maturin develop --release
 
 pre-commit:
@@ -16,10 +14,8 @@ test:
 	python -m pytest tests
 
 run: install
-	conda deactivate -f
 	python run.py
 
 run-release: install-release
-	conda deactivate -f
 	python run.py
 
